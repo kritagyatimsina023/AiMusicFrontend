@@ -1,0 +1,68 @@
+{
+  "courses": [
+    {
+      "id": 1,
+      "title": "Guitar ",
+      "slug": "guitar",
+      "description": "Explore the rich tones of acoustic and electric guitars while learning strumming patterns, chords, and melody crafting essential for generating expressive guitar-driven music.",
+      "isFeatured": true,
+      "image": "/photos/guitar.avif"
+    },
+    {
+      "id": 2,
+      "title": "Piano ",
+      "slug": "piano",
+      "description": "Understand piano scales, chord progressions, and harmony structures to help your AI system create warm, emotional, and dynamic piano-based compositions.",
+      "isFeatured": true,
+      "image": "/photos/piano.avif"
+    },
+    {
+      "id": 3,
+      "title": "Drum Sets",
+      "slug": "advanced-music-production",
+      "description": "Learn how different instruments blend in professional compositions, including sound layering, mixing, and mastering to enhance AI-generated music quality.",
+      "isFeatured": true,
+      "image": "/photos/music_prod.avif"
+    },
+    {
+      "id": 6,
+      "title": "Electronic Dance Music Production",
+      "slug": "edm-production",
+      "description": "Study synthesizers, drum machines, and electronic instruments to teach your AI how to produce energetic beats and modern EDM soundscapes.",
+      "isFeatured": true,
+      "image": "/photos/edm.avif"
+    },
+    {
+      "id": 7,
+      "title": "Electronic Music",
+      "slug": "electronic-music",
+      "description": "Explore synthesizers, digital sound design, and rhythmic patterns that help AI generate energetic electronic tracks with modern textures and driving beats.",
+      "isFeatured": true,
+      "image": "/photos/electronic.jpg"
+    },
+    {
+      "id": 8,
+      "title": "Jazz Improvisation",
+      "slug": "jazz-improvisation",
+      "description": "Learn the expressive nature of jazz chords, swing rhythms, and improvisation techniques that enable AI to produce soulful, smooth, and highly dynamic jazz pieces.",
+      "isFeatured": true,
+      "image": "/photos/jazz.webp"
+    },
+    {
+      "id": 9,
+      "title": "Rock Music Essentials",
+      "slug": "rock-music-essentials",
+      "description": "Understand aggressive guitar riffs, punchy drum patterns, and powerful vocal styles to train AI models in generating bold and energetic rock compositions.",
+      "isFeatured": true,
+      "image": "/photos/Rock.jpg"
+    },
+    {
+      "id": 10,
+      "title": "Classical Music Theory",
+      "slug": "classical-music-theory",
+      "description": "Discover orchestration, harmony, and the structure of classical compositions so your AI can create elegant, emotional, and deeply layered symphonic music.",
+      "isFeatured": true,
+      "image": "/photos/classical.jpg"
+    }
+  ]
+}
