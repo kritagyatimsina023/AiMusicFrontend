@@ -21,7 +21,7 @@ const content = [
   {
     title: "Mood-Based Music Generation",
     description:
-      "Set the mood and watch your music evolve. Whether it’s upbeat, melancholic, or calm, our AI crafts melodies, harmonies, and rhythms that reflect the emotion behind your lyrics.",
+      "Set the mood and watch your music evolve. Whether it's upbeat, melancholic, or calm, our AI crafts melodies, harmonies, and rhythms that reflect the emotion behind your lyrics.",
     content: (
       <div className="flex h-full w-full items-center justify-center text-white">
         <img

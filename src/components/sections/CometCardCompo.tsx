@@ -32,9 +32,20 @@ const CometCardCompo: React.FC<CometCardCompoProps> = ({ course }) => {
               src={course?.image}
             />
           </div>
-          <div className="text-start px-4 py-6">
-            <h1 className="text-[0.989em] font-bold ">{course?.title}</h1>
-            <p className="text-neutral-600 dark:text-neutral-400">
+          <div
+            className="text-start px-4 py-6"
+            style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
+          >
+            <h1
+              className="text-[0.989em] font-bold"
+              style={{ fontWeight: 700, letterSpacing: "-0.01em" }}
+            >
+              {course?.title}
+            </h1>
+            <p
+              className="text-neutral-600 dark:text-neutral-400"
+              style={{ fontWeight: 300 }}
+            >
               {course?.description}
             </p>
           </div>
