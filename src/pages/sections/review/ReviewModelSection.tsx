@@ -12,16 +12,16 @@ import { useReviewStore } from "@/store/useReviewStore";
 const starLabels = ["", "Terrible", "Poor", "Okay", "Good", "Excellent"];
 
 const ReviewModelSection = () => {
-  const contextReview = useContext(ReviewContext);
-  if (!contextReview) throw new Error("No review context found");
-  const { setLoadingReview } = contextReview;
+  // const contextReview = useContext(ReviewContext);
+  // if (!contextReview) throw new Error("No review context found");
+  // const { setLoadingReview } = contextReview;
 
   const { setOpenReview, openReview, storeReview, currentUserReview } =
     useReviewStore();
 
-  const context = useContext(SignInAndSignUpContext);
-  if (!context)
-    throw new Error("Navbar must be used within SignInAndSignUpProvider");
+  // const context = useContext(SignInAndSignUpContext);
+  // if (!context)
+  //   throw new Error("Navbar must be used within SignInAndSignUpProvider");
   // const { reviewOpen, setreviewOpen } = context;
 
   const [rating, setRating] = useState(0);

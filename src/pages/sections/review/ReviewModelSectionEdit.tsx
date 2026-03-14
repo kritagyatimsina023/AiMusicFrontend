@@ -1,37 +1,34 @@
 "use client";
-import api from "../../../../utils/api";
-import React, { useContext, useEffect, useState } from "react";
+// import api from "../../../../utils/api";
+import React, { useEffect, useState } from "react";
 import { UserAuth } from "@/context/AuthContext";
 import { X } from "lucide-react";
 import { toast } from "react-toastify";
-import { SignInAndSignUpContext } from "@/context/SiginAndSignUp";
-import { ReviewContext } from "@/context/ReviewContext";
+// import { SignInAndSignUpContext } from "@/context/SiginAndSignUp";
+// import { ReviewContext } from "@/context/ReviewContext";
 import { useReviewStore } from "@/store/useReviewStore";
-import { useAuthStore } from "@/store/useAuthStore";
+// import { useAuthStore } from "@/store/useAuthStore";
 
-interface Review {
-  _id: string;
-  review: string;
-  rating: number;
-  createdAt: string;
-  user?: {
-    name: string;
-    email: string;
-    profileImg: string;
-  };
-}
+// interface Review {
+//   _id: string;
+//   review: string;
+//   rating: number;
+//   createdAt: string;
+//   user?: {
+//     name: string;
+//     email: string;
+//     profileImg: string;
+//   };
+// }
 
-interface ReviewModelSectionEditProps {
-  onReviewUpdated?: (updated: Review) => void;
-  existingReview?: Review | null; // Add this prop
-}
+// interface ReviewModelSectionEditProps {
+//   onReviewUpdated?: (updated: Review) => void;
+//   existingReview?: Review | null; // Add this prop
+// }
 
 const starLabels = ["", "Terrible", "Poor", "Okay", "Good", "Excellent"];
 
-const ReviewModelSectionEdit: React.FC<ReviewModelSectionEditProps> = ({
-  onReviewUpdated,
-  existingReview, // Receive from parent
-}) => {
+const ReviewModelSectionEdit = () => {
   // Don't use context if you're using store
   // const contextReview = useContext(ReviewContext);
   // if (!contextReview) throw new Error("No Review context found");
@@ -45,10 +42,10 @@ const ReviewModelSectionEdit: React.FC<ReviewModelSectionEditProps> = ({
     setOpenReview,
   } = useReviewStore();
 
-  const context = useContext(SignInAndSignUpContext);
-  if (!context)
-    throw new Error("Navbar must be used within SignInAndSignUpProvider");
-  const { reviewOpen, setreviewOpen } = context;
+  // const context = useContext(SignInAndSignUpContext);
+  // if (!context)
+  //   throw new Error("Navbar must be used within SignInAndSignUpProvider");
+  // const { setreviewOpen } = context;
   console.log(storeCurrentUserReview, "is current review");
 
   const [rating, setRating] = useState(0);
@@ -66,41 +63,40 @@ const ReviewModelSectionEdit: React.FC<ReviewModelSectionEditProps> = ({
     }
   }, [currentReview]);
 
-  useEffect(() => {
-    // Only fetch if we don't have existingReview prop
-    if (!existingReview) {
-      fetchCurrentUserReview();
-    }
-  }, [fetchCurrentUserReview, existingReview]);
+  // useEffect(() => {
+  //   // Only fetch if we don't have existingReview prop
+  //   if (!existingReview) {
+  //     fetchCurrentUserReview();
+  //   }
+  // }, [fetchCurrentUserReview, existingReview]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
     if (!currentReview?._id) {
       toast.error("No review to edit");
       return;
     }
-
     try {
       // Use the store's editReview method
       await editReview(currentReview._id, reviewText, rating);
       // Notify parent if callback exists
-      if (onReviewUpdated) {
-        onReviewUpdated({
-          ...currentReview,
-          review: reviewText,
-          rating: rating,
-        });
-      }
+      fetchCurrentUserReview();
+
+      // if (onReviewUpdated) {
+      //   onReviewUpdated({
+      //     ...currentReview,
+      //     review: reviewText,
+      //     rating: rating,
+      //   });
+      // }
       // toast.success("Review edited successfully");
-      setreviewOpen(false);
+      // setreviewOpen(false);
       setOpenReview(); // Close in store as well
     } catch (error) {
       toast.error("Failed to update review");
       console.error("Edit error:", error);
     }
   };
-
   const canSubmit = reviewText.trim().length > 0 && rating > 0;
 
   return (
@@ -123,7 +119,7 @@ const ReviewModelSectionEdit: React.FC<ReviewModelSectionEditProps> = ({
           <button
             onClick={() => {
               setOpenReview();
-              setreviewOpen(false);
+              // setreviewOpen(false);
             }}
             className="w-[30px] h-[30px] rounded-[8px] bg-[#1a1c22] border border-[#252830]
               flex items-center justify-center flex-shrink-0 hover:bg-[#2a2d38] transition-colors"

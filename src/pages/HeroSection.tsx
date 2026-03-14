@@ -10,11 +10,11 @@ import { easeInOut, motion } from "motion/react";
 import { useSignInStore } from "@/store/useSignInStore";
 
 const HeroSection = () => {
-  const context = useContext(SignInAndSignUpContext);
+  // const context = useContext(SignInAndSignUpContext);
   const naviagte = useNavigate();
-  if (!context) {
-    throw new Error("Navbar must be used within SignInAndSignUpProvider");
-  }
+  // if (!context) {
+  //   throw new Error("Navbar must be used within SignInAndSignUpProvider");
+  // }
   const { setOpen, setActivate } = useSignInStore();
   const { user } = UserAuth();
 

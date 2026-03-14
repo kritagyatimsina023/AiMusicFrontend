@@ -1,6 +1,6 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { StarIcon } from "lucide-react";
-import { SignInAndSignUpContext } from "@/context/SiginAndSignUp";
+// import { SignInAndSignUpContext } from "@/context/SiginAndSignUp";
 import ReviewModelSection from "./ReviewModelSection";
 import { useReviewStore } from "@/store/useReviewStore";
 // interface Review {
@@ -15,19 +15,19 @@ const ReviewSection = () => {
   const [rating, setRating] = useState<number>(0);
   const [hover, setHover] = useState<number>(0);
   //   const [reviewText, setReviewText] = useState<string>("");
-  const context = useContext(SignInAndSignUpContext);
-  if (!context) {
-    throw new Error("Navbar must be used within SignInAndSignUpProvider");
-  }
+  // const context = useContext(SignInAndSignUpContext);
+  // if (!context) {
+  //   throw new Error("Navbar must be used within SignInAndSignUpProvider");
+  // }
   const { openReview, setOpenReview } = useReviewStore();
-  const { reviewOpen, setreviewOpen } = context;
+  // const { reviewOpen, setreviewOpen } = context;
 
   const handleToogle = () => {
-    setreviewOpen(!reviewOpen);
+    // setreviewOpen(!reviewOpen);
   };
   const handlerStarButton = (starValue: number) => {
     setRating(starValue);
-    setreviewOpen(!reviewOpen);
+    // setreviewOpen(!reviewOpen);
   };
 
   return (

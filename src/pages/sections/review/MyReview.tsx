@@ -1,42 +1,43 @@
 "use client";
 import { Pencil, Trash2, MoreVertical } from "lucide-react";
-import React, { useContext, useEffect, useState } from "react";
-import { SignInAndSignUpContext } from "@/context/SiginAndSignUp";
+import { useEffect, useState } from "react";
+// import { SignInAndSignUpContext } from "@/context/SiginAndSignUp";
 import { toast } from "react-toastify";
-import { UserAuth } from "@/context/AuthContext";
-import { ReviewContext } from "@/context/ReviewContext";
+// import { UserAuth } from "@/context/AuthContext";
+// import { ReviewContext } from "@/context/ReviewContext";
 import ReviewModelSectionEdit from "./ReviewModelSectionEdit";
 import { useReviewStore } from "@/store/useReviewStore";
+import { useAuthStore } from "@/store/useAuthStore";
 
 const starLabels = ["", "Terrible", "Poor", "Okay", "Good", "Excellent"];
 
-interface UserType {
-  name: string;
-  email: string;
-  profileImg: string;
-}
+// interface UserType {
+//   name: string;
+//   email: string;
+//   profileImg: string;
+// }
 
-interface ReviewType {
-  _id: string;
-  review: string;
-  rating: number;
-  createdAt: string;
-  user: UserType;
-}
+// interface ReviewType {
+//   _id: string;
+//   review: string;
+//   rating: number;
+//   createdAt: string;
+//   user: UserType;
+// }
 
 const MyReview = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const contextReview = useContext(ReviewContext);
-  if (!contextReview) throw new Error("No review context found");
-  const { setLoadingReview } = contextReview;
+  // const contextReview = useContext(ReviewContext);
+  // if (!contextReview) throw new Error("No review context found");
+  // const { setLoadingReview } = contextReview;
+  const { user } = useAuthStore();
+  // const { user } = UserAuth();
 
-  const { user } = UserAuth();
-
-  const context = useContext(SignInAndSignUpContext);
-  if (!context)
-    throw new Error("Navbar must be used within SignInAndSignUpProvider");
-  const { reviewOpen, setreviewOpen } = context;
+  // const context = useContext(SignInAndSignUpContext);
+  // if (!context)
+  //   throw new Error("Navbar must be used within SignInAndSignUpProvider");
+  // const { reviewOpen, setreviewOpen } = context;
 
   const {
     fetchCurrentUserReview,
@@ -56,8 +57,10 @@ const MyReview = () => {
   };
 
   useEffect(() => {
-    fetchCurrentUserReview();
-  }, [fetchCurrentUserReview]);
+    if (user) {
+      fetchCurrentUserReview();
+    }
+  }, [user]);
 
   const handleDeleteReview = async () => {
     if (!currentUserReview?._id) {
@@ -67,20 +70,20 @@ const MyReview = () => {
 
     try {
       await deleteReview(currentUserReview._id);
-      toast.success("Review deleted successfully");
+      // toast.success("Review deleted successfully");
       setMenuOpen(false);
       // Refresh the review list
       fetchCurrentUserReview();
     } catch (error) {
-      toast.error("Failed to delete review");
+      // toast.error("Failed to delete review");
       console.error("Delete error:", error);
     }
   };
 
-  const handleReviewUpdated = (updatedReview: ReviewType) => {
-    // This will trigger a re-fetch or you can update the store directly
-    fetchCurrentUserReview();
-  };
+  // const handleReviewUpdated = (updatedReview: ReviewType) => {
+  //   // This will trigger a re-fetch or you can update the store directly
+  //   fetchCurrentUserReview();
+  // };
 
   // Don't render if no review
   if (!currentUserReview) return null;
@@ -229,8 +232,8 @@ const MyReview = () => {
           />
           <div className="relative z-50">
             <ReviewModelSectionEdit
-              onReviewUpdated={handleReviewUpdated}
-              existingReview={currentUserReview}
+            // onReviewUpdated={handleReviewUpdated}
+            // existingReview={currentUserReview}
             />
           </div>
         </div>

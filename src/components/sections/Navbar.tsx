@@ -17,14 +17,14 @@ import icons from "../../../data/Contact-icons";
 import { useSignInStore } from "@/store/useSignInStore";
 
 const Navbar = ({ className }: { className?: string }) => {
-  const context = useContext(SignInAndSignUpContext);
+  // const context = useContext(SignInAndSignUpContext);
   const navigate = useNavigate();
-  const contextReview = useContext(ReviewContext);
-  if (!contextReview) throw new Error("No review context found");
-  const { setLoadingReview } = contextReview;
+  // const contextReview = useContext(ReviewContext);
+  // if (!contextReview) throw new Error("No review context found");
+  // const { setLoadingReview } = contextReview;
 
-  if (!context)
-    throw new Error("Navbar must be used within SignInAndSignUpProvider");
+  // if (!context)
+  //   throw new Error("Navbar must be used within SignInAndSignUpProvider");
 
   // const { open, setOpen, activate, setActivate } = context;
   const {

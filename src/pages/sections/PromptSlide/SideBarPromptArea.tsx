@@ -56,9 +56,9 @@ const SideBarPromptArea = () => {
   }, []);
   return (
     <div className="h-screen w-screen flex relative overflow-y-hidden">
-      <div ref={navbarRef}>
+      {/* <div ref={navbarRef}>
         <Navbar />
-      </div>
+      </div> */}
       <img
         src="/photos/gradient.png"
         className="absolute top-0 right-0 opacity-60 -z-1"
