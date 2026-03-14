@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { StarIcon } from "lucide-react";
 import { SignInAndSignUpContext } from "@/context/SiginAndSignUp";
 import ReviewModelSection from "./ReviewModelSection";
+import { useReviewStore } from "@/store/useReviewStore";
 // interface Review {
 //   _id: string;
 //   review: string;
@@ -18,6 +19,7 @@ const ReviewSection = () => {
   if (!context) {
     throw new Error("Navbar must be used within SignInAndSignUpProvider");
   }
+  const { openReview, setOpenReview } = useReviewStore();
   const { reviewOpen, setreviewOpen } = context;
 
   const handleToogle = () => {
@@ -60,14 +62,14 @@ const ReviewSection = () => {
           })}
         </div>
         <button
-          onClick={() => setreviewOpen(!reviewOpen)}
+          onClick={setOpenReview}
           className="bg-green-500/50 px-7 rounded-[8px] text-[0.989em] py-2"
         >
           Write a Review
         </button>
       </div>
 
-      {reviewOpen && (
+      {openReview && (
         <div className="fixed inset-0 z-40 flex items-center justify-center">
           {/* Backdrop with blur */}
           <div

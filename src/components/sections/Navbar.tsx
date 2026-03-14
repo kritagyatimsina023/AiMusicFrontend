@@ -9,7 +9,7 @@ import { useNavigate, Link } from "react-router-dom";
 import gsap from "gsap";
 import { Signin } from "./Signin";
 import { Signup } from "./Signup";
-import { toast } from "react-toastify";
+// import { toast } from "react-toastify";
 import { ReviewContext } from "@/context/ReviewContext";
 import { SignInAndSignUpContext } from "@/context/SiginAndSignUp";
 import { useAuthStore } from "@/store/useAuthStore";
@@ -75,19 +75,19 @@ const Navbar = ({ className }: { className?: string }) => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const handleSignOut = async () => {
-    try {
-      await logOut();
-      setLoadingReview(true);
-      setOpen(false);
-      setActivate(false);
-      toast.success("Logged out!");
-      navigate("/");
-    } catch (error) {
-      console.error(error);
-      toast.error("Logout failed");
-    }
-  };
+  // const handleSignOut = async () => {
+  //   try {
+  //     await logOut();
+  //     setLoadingReview(true);
+  //     setOpen(false);
+  //     setActivate(false);
+  //     toast.success("Logged out!");
+  //     navigate("/");
+  //   } catch (error) {
+  //     console.error(error);
+  //     toast.error("Logout failed");
+  //   }
+  // };
   const handleToggle = () => {
     if (activate) {
       gsap.to(".sign-in-compo", {
@@ -156,11 +156,7 @@ const Navbar = ({ className }: { className?: string }) => {
           )}
 
           {user && (
-            <CiLogout
-              onClick={handleSignOut}
-              size={20}
-              className="cursor-pointer"
-            />
+            <CiLogout onClick={logOut} size={20} className="cursor-pointer" />
           )}
         </Menu>
       </div>

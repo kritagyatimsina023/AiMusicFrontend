@@ -13,8 +13,10 @@ const Home = () => {
       <AvailableVersions />
       <FeaturedSection />
       <ChooseUs />
-      <DataSafety />
-      <MyReview />
+      <div className="flex items-center justify-center">
+        <DataSafety />
+        <MyReview />
+      </div>
     </main>
   );
 };
