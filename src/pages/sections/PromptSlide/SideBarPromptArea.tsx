@@ -65,6 +65,7 @@ const SideBarPromptArea = () => {
         alt=""
       />
       <div className="h-0 w-[40rem] absolute top-[20%] right-[-5%] shadow-[0_0_900px_10px_#e99b63] -rotate-[30deg]"></div>
+
       <TooltipProvider>
         <div
           onClick={() => {

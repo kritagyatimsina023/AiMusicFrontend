@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import Cookies from "js-cookie";
 import { SignInAndSignUpContext } from "@/context/SiginAndSignUp";
 import { ReviewContext } from "@/context/ReviewContext";
+import { useReviewStore } from "@/store/useReviewStore";
 
 const starLabels = ["", "Terrible", "Poor", "Okay", "Good", "Excellent"];
 
@@ -15,10 +16,13 @@ const ReviewModelSection = () => {
   if (!contextReview) throw new Error("No review context found");
   const { setLoadingReview } = contextReview;
 
+  const { setOpenReview, openReview, storeReview, currentUserReview } =
+    useReviewStore();
+
   const context = useContext(SignInAndSignUpContext);
   if (!context)
     throw new Error("Navbar must be used within SignInAndSignUpProvider");
-  const { reviewOpen, setreviewOpen } = context;
+  // const { reviewOpen, setreviewOpen } = context;
 
   const [rating, setRating] = useState(0);
   const [hover, setHover] = useState(0);
@@ -27,20 +31,24 @@ const ReviewModelSection = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    try {
-      await api.post("/reviews", {
-        review: reviewText,
-        rating,
-        userid: Cookies.get("userId"),
-      });
-      toast.success("Review was sent");
-      setLoadingReview(true);
-      setreviewOpen(!reviewOpen);
-    } catch {
-      toast.error("Cannot add another review");
-    }
+    const reviewRes = storeReview(reviewText, rating);
+    console.log("this is user review", reviewRes);
+    // if (currentUserReview) {
+    //   toast.error("Cannot add another review");
+    // }
+    // try {
+    //   await api.post("/reviews", {
+    //     review: reviewText,
+    //     rating,
+    //     userid: Cookies.get("userId"),
+    //   });
+    //   toast.success("Review was sent");
+    //   setLoadingReview(true);
+    //   setreviewOpen(!reviewOpen);
+    // } catch {
+    //   toast.error("Cannot add another review");
+    // }
   };
-
   const canSubmit = reviewText.trim().length > 0 && rating > 0;
 
   return (
@@ -63,14 +71,13 @@ const ReviewModelSection = () => {
             </p>
           </div>
           <button
-            onClick={() => setreviewOpen(!reviewOpen)}
+            onClick={setOpenReview}
             className="w-[30px] h-[30px] rounded-[8px] bg-[#1a1c22] border border-[#252830]
               flex items-center justify-center flex-shrink-0 hover:bg-[#2a2d38] transition-colors"
           >
             <X size={13} className="text-[#666]" strokeWidth={2} />
           </button>
         </div>
-
         {/* User row */}
         <div className="flex items-center gap-2.5 py-3.5 border-t border-[#1a1c22]">
           <img

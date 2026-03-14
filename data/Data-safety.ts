@@ -8,6 +8,7 @@ interface DataSafety {
   logo: LucideIcon;
   heading: string;
   paragraph?: string;
+  verified?: boolean;
 }
 const DataSafetyInfo: DataSafety[] = [
   {
@@ -19,14 +20,17 @@ const DataSafetyInfo: DataSafety[] = [
     logo: CloudCog,
     heading: "This app may collect these data types",
     paragraph: "Personal info and 6 others",
+    verified: true,
   },
   {
     logo: LockIcon,
     heading: "Data is encrypted in transit",
+    verified: true,
   },
   {
     logo: Trash2,
     heading: "You can request that data be deleted",
+    verified: true,
   },
 ];
 export default DataSafetyInfo;

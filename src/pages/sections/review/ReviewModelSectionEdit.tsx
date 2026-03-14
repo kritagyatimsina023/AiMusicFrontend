@@ -6,61 +6,98 @@ import { X } from "lucide-react";
 import { toast } from "react-toastify";
 import { SignInAndSignUpContext } from "@/context/SiginAndSignUp";
 import { ReviewContext } from "@/context/ReviewContext";
+import { useReviewStore } from "@/store/useReviewStore";
+import { useAuthStore } from "@/store/useAuthStore";
 
 interface Review {
   _id: string;
   review: string;
   rating: number;
   createdAt: string;
+  user?: {
+    name: string;
+    email: string;
+    profileImg: string;
+  };
 }
 
 interface ReviewModelSectionEditProps {
   onReviewUpdated?: (updated: Review) => void;
+  existingReview?: Review | null; // Add this prop
 }
 
 const starLabels = ["", "Terrible", "Poor", "Okay", "Good", "Excellent"];
 
 const ReviewModelSectionEdit: React.FC<ReviewModelSectionEditProps> = ({
   onReviewUpdated,
+  existingReview, // Receive from parent
 }) => {
-  const contextReview = useContext(ReviewContext);
-  if (!contextReview) throw new Error("No Review context found");
-  const { currentUserReview, setCurrUserReview, setLoadingReview } =
-    contextReview;
+  // Don't use context if you're using store
+  // const contextReview = useContext(ReviewContext);
+  // if (!contextReview) throw new Error("No Review context found");
+  // const { currentUserReview, setCurrUserReview, setLoadingReview } = contextReview;
+
+  // Use store instead
+  const {
+    fetchCurrentUserReview,
+    currentUserReview: storeCurrentUserReview,
+    editReview,
+    setOpenReview,
+  } = useReviewStore();
 
   const context = useContext(SignInAndSignUpContext);
   if (!context)
     throw new Error("Navbar must be used within SignInAndSignUpProvider");
   const { reviewOpen, setreviewOpen } = context;
+  console.log(storeCurrentUserReview, "is current review");
 
   const [rating, setRating] = useState(0);
   const [hover, setHover] = useState(0);
   const [reviewText, setReviewText] = useState("");
   const { user } = UserAuth();
+  // const {user} = useAuthStore()
+  // Use existingReview prop if provided, otherwise use from store
+  const currentReview = storeCurrentUserReview;
 
   useEffect(() => {
-    setReviewText(currentUserReview?.review || "");
-    setRating(currentUserReview?.rating || 0);
-  }, [currentUserReview]);
+    if (currentReview) {
+      setReviewText(currentReview.review || "");
+      setRating(currentReview.rating || 0);
+    }
+  }, [currentReview]);
+
+  useEffect(() => {
+    // Only fetch if we don't have existingReview prop
+    if (!existingReview) {
+      fetchCurrentUserReview();
+    }
+  }, [fetchCurrentUserReview, existingReview]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    if (!currentReview?._id) {
+      toast.error("No review to edit");
+      return;
+    }
+
     try {
-      const res = await api.patch(`/reviews/${currentUserReview?._id}`, {
-        review: reviewText,
-        rating,
-      });
-      if (res?.data?.data?.updatedreview) {
-        const updatedReview = res.data.data.updatedreview;
-        setCurrUserReview(updatedReview);
-        onReviewUpdated?.(updatedReview);
-        setLoadingReview(true);
+      // Use the store's editReview method
+      await editReview(currentReview._id, reviewText, rating);
+      // Notify parent if callback exists
+      if (onReviewUpdated) {
+        onReviewUpdated({
+          ...currentReview,
+          review: reviewText,
+          rating: rating,
+        });
       }
-      toast.success("Review edited successfully");
-      setreviewOpen(!reviewOpen);
+      // toast.success("Review edited successfully");
+      setreviewOpen(false);
+      setOpenReview(); // Close in store as well
     } catch (error) {
       toast.error("Failed to update review");
-      console.log(error);
+      console.error("Edit error:", error);
     }
   };
 
@@ -84,7 +121,10 @@ const ReviewModelSectionEdit: React.FC<ReviewModelSectionEditProps> = ({
             <p className="text-[12px] text-[#444] mt-0.5">Update your rating</p>
           </div>
           <button
-            onClick={() => setreviewOpen(!reviewOpen)}
+            onClick={() => {
+              setOpenReview();
+              setreviewOpen(false);
+            }}
             className="w-[30px] h-[30px] rounded-[8px] bg-[#1a1c22] border border-[#252830]
               flex items-center justify-center flex-shrink-0 hover:bg-[#2a2d38] transition-colors"
           >
@@ -102,7 +142,7 @@ const ReviewModelSectionEdit: React.FC<ReviewModelSectionEditProps> = ({
           />
           <div>
             <p className="text-[13px] font-medium text-[#e0e0e0]">
-              {user?.displayName ?? user?.email}
+              {user?.displayName ?? user?.email ?? "User"}
             </p>
             {user?.displayName && (
               <p className="text-[11px] text-[#444]">{user.email}</p>
