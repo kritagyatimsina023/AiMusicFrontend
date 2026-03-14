@@ -62,6 +62,7 @@ const PromptOutputSection = () => {
                 <p className="p-2 text-gray-300/70">{data.lyrics}</p>
               </div>
             </div>
+            <p>{data.version}</p>
 
             <div className="w-full flex justify-start">
               <div className="flex flex-col max-w-[40rem]">

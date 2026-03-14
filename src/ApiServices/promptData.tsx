@@ -19,6 +19,7 @@ function formattedErrorMessage(msg: string) {
 export const storeCallApiPrompt = async (
   trimmedName: string,
   promptTxt: string,
+  version: string,
   // genre: string,
   // instruments: string[],
   // key: string,
@@ -29,6 +30,7 @@ export const storeCallApiPrompt = async (
       name: trimmedName,
       userid: Cookies.get("userId"),
       lyrics: promptTxt,
+      version,
       // genre: genre,
       // instruments: instruments,
       // key: key,

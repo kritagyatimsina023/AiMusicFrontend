@@ -7,6 +7,7 @@ interface promptType {
   name: string;
   lyrics: string;
   user: string;
+  version: string;
   // genre: string;
   // key: string;
   // tempo: string;
@@ -21,6 +22,7 @@ interface useFetchProps {
   getUserPrompt: () => Promise<void>;
   createPrompt: (
     promptTxt: string,
+    version: string,
     // genre: string,
     // instruments: string[],
     // key: string,
@@ -43,7 +45,7 @@ export const useFetchPrompt = create<useFetchProps>((set, get) => ({
       // set({ isLoading: false });
     }
   },
-  createPrompt: async (promptTxt) => {
+  createPrompt: async (promptTxt, version) => {
     try {
       const { getUserPrompt } = get();
       set({ isLoading: true });
@@ -51,6 +53,7 @@ export const useFetchPrompt = create<useFetchProps>((set, get) => ({
       const response = await storeCallApiPrompt(
         trimmedName,
         promptTxt,
+        version,
         // genre,
         // instruments,
         // key,

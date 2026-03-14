@@ -15,12 +15,12 @@ import { ArrowBigRight } from "lucide-react";
 import { TooltipProvider } from "../../../components/ui/tooltip";
 import Navbar from "@/components/sections/Navbar";
 import gsap from "gsap";
-import NavBarTwo from "@/components/sections/NavBarTwo";
+// import NavBarTwo from "@/components/sections/NavBarTwo";
 
 const SideBarPromptArea = () => {
   const [sideBarOpenbtn, setsideBarOpenbtn] = useState<boolean>(true);
   const scrollContainerRef = useRef<HTMLDivElement | null>(null);
-  const lastScrollY = useRef(0);
+  // const lastScrollY = useRef(0);
   const navbarRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -55,7 +55,7 @@ const SideBarPromptArea = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
   return (
-    <div className="h-screen w-screen flex relative">
+    <div className="h-screen w-screen flex relative overflow-y-hidden">
       <div ref={navbarRef}>
         <Navbar />
       </div>

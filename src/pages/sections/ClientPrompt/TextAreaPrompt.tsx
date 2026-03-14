@@ -61,6 +61,7 @@ const TextAreaPrompt = () => {
   // const { genre, instruments, key, tempo } = useParameter();
   // const { openOutputSection } = useToggleOutput();
   const { createPrompt, isLoading } = useFetchPrompt();
+  const { versionSelection } = useModelStore();
   const { openOutputSection } = useModelStore();
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -71,6 +72,7 @@ const TextAreaPrompt = () => {
     // const trimmedName = promptTxt.trim().split(" ").slice(0, 5).join(" ");
     const response = await createPrompt(
       promptTxt,
+      versionSelection,
       // genre,
       // instruments,
       // key,
@@ -86,7 +88,7 @@ const TextAreaPrompt = () => {
 
   return (
     <>
-      <div className="w-full flex justify-center ">
+      <div className="w-full flex justify-center   ">
         <form onSubmit={handleSubmit}>
           <div className=" flex flex-col gap-10 items-center ">
             <div className="flex gap-20 w-240">
@@ -103,6 +105,10 @@ const TextAreaPrompt = () => {
                 placeholder="Caption (400 words)"
               />
             </div>
+
+            {/* <div className="w-[50%]  flex justify-center">
+              <ModelVersion />
+            </div> */}
             {/* <div className="flex justify-between mt-6">
               {data.map((data, idx) => (
                 <InputDropDown data={data} key={idx} />
