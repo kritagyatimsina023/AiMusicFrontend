@@ -15,6 +15,7 @@ import {
 import Cookies from "js-cookie";
 import api from "../../utils/api";
 import { toast } from "react-toastify";
+import { useReviewStore } from "./useReviewStore";
 
 interface AuthStore {
   user: User | null;
@@ -54,7 +55,7 @@ export const useAuthStore = create<AuthStore>((set) => ({
 
       const userId = res.data.user._id;
       Cookies.set("userId", userId, { expires: 7 });
-
+      useReviewStore.getState().fetchCurrentUserReview();
       set({ user: firebaseUser, userId });
       toast.success(
         `Welcome ${firebaseUser.displayName || firebaseUser.email}`,
@@ -89,6 +90,7 @@ export const useAuthStore = create<AuthStore>((set) => ({
 
       const userId = res.data.user._id;
       Cookies.set("userId", userId, { expires: 7 });
+      useReviewStore.getState().fetchCurrentUserReview();
 
       set({ user: firebaseUser, userId });
       toast.success(`Logged in as ${firebaseUser.email}`);
@@ -114,6 +116,7 @@ export const useAuthStore = create<AuthStore>((set) => ({
         email: firebaseUser.email,
         photoUrl: "/photos/avatar.jpg",
       });
+      // useReviewStore.getState().fetchCurrentUserReview();
 
       const userId = res.data.user._id;
       Cookies.set("userId", userId, { expires: 7 });
@@ -130,11 +133,11 @@ export const useAuthStore = create<AuthStore>((set) => ({
     await signOut(auth);
     Cookies.remove("authToken");
     Cookies.remove("userId");
+    useReviewStore.setState({ currentUserReview: null });
     set({ user: null, userId: null });
     toast.success("Logged out successfully");
   },
 }));
-
 // Listen to Firebase auth state changes
 onAuthStateChanged(auth, async (currentUser) => {
   const store = useAuthStore.getState();

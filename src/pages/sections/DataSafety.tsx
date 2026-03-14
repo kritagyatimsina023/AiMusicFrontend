@@ -3,9 +3,11 @@ import DataSafetyInfo from "../../../data/Data-safety";
 const DataSafety = () => {
   return (
     <div
-      className="max-w-[560px] mx-auto mt-10 px-1"
+      className="max-w-[560px] mx-auto relative  mt-10 px-1"
       style={{ fontFamily: "'DM Sans', sans-serif" }}
     >
+      {/* <div className="h-0 w-[10rem] absolute top-[20%] right-[15%] shadow-[0_0_900px_10px_#e99b63]"></div> */}
+
       {/* Label + title */}
       <p className="text-[10px] uppercase tracking-[0.14em] text-[#1DB954] font-medium mb-2">
         Privacy

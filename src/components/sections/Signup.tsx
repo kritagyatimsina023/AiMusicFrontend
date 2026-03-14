@@ -1,5 +1,5 @@
 "use client";
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
 import { cn } from "@/lib/utils";
@@ -16,7 +16,7 @@ import { IoEye } from "react-icons/io5";
 // import defaultPic from "@/public/photos/avatar.jpg";
 import gsap from "gsap";
 // import Cookies from "js-cookie";
-import { SignInAndSignUpContext } from "@/context/SiginAndSignUp";
+// import { SignInAndSignUpContext } from "@/context/SiginAndSignUp";
 import { toast } from "react-toastify";
 // import api from "../../../utils/api";
 import { useAuthStore } from "@/store/useAuthStore";
@@ -51,10 +51,10 @@ export function Signup() {
   const [email, setEmail] = useState<string>("");
   const { emailSignUp } = useAuthStore();
   const [password, setPassword] = useState<string>("");
-  const context = useContext(SignInAndSignUpContext);
-  if (!context) {
-    throw new Error("Navbar must be used within SignInAndSignUpProvider");
-  }
+  // const context = useContext(SignInAndSignUpContext);
+  // if (!context) {
+  //   throw new Error("Navbar must be used within SignInAndSignUpProvider");
+  // }
   // const {
   //   open,
   //   setOpen,

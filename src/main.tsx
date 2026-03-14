@@ -17,32 +17,32 @@ createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <Router>
       <AuthContextProvider>
-        <SignInAndSignUpProvider>
-          <ToggleOutputProvider>
-            <ParameterProvider>
-              <ReviewProvider>
-                <PromptProvider>
-                  {/* <div className="w-full relative flex items-center justify-center">
+        {/* <SignInAndSignUpProvider> */}
+        {/* <ToggleOutputProvider> */}
+        {/* <ParameterProvider> */}
+        {/* <ReviewProvider> */}
+        {/* <PromptProvider> */}
+        {/* <div className="w-full relative flex items-center justify-center">
                     <Navbar />
                   </div> */}
-                  <App />
-                  <ToastContainer
-                    position="bottom-right"
-                    autoClose={5000}
-                    hideProgressBar={false}
-                    newestOnTop={false}
-                    closeOnClick={false}
-                    rtl={false}
-                    pauseOnFocusLoss
-                    draggable
-                    pauseOnHover
-                    theme="dark"
-                  />
-                </PromptProvider>
-              </ReviewProvider>
-            </ParameterProvider>
-          </ToggleOutputProvider>
-        </SignInAndSignUpProvider>
+        <App />
+        <ToastContainer
+          position="bottom-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick={false}
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="dark"
+        />
+        {/* </PromptProvider> */}
+        {/* </ReviewProvider> */}
+        {/* </ParameterProvider> */}
+        {/* </ToggleOutputProvider> */}
+        {/* </SignInAndSignUpProvider> */}
       </AuthContextProvider>
     </Router>
   </StrictMode>,

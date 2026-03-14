@@ -37,7 +37,7 @@ interface ReviewProps {
   deleteReview: (reviewId: string) => Promise<void>;
 }
 
-export const useReviewStore = create<ReviewProps>((set, get) => ({
+export const useReviewStore = create<ReviewProps>((set) => ({
   openReview: false,
   currentUserReview: null,
 

@@ -1,8 +1,10 @@
-import { UserAuth } from "@/context/AuthContext";
+// import { UserAuth } from "@/context/AuthContext";
+import { useAuthStore } from "@/store/useAuthStore";
 import { useNavigate } from "react-router-dom";
 
 const BottomUser = () => {
-  const { user, logOut } = UserAuth();
+  // const { user, logOut } = UserAuth();
+  const { user, logOut } = useAuthStore();
   const navigate = useNavigate();
 
   async function handleLogOut() {

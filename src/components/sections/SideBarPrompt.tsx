@@ -8,7 +8,7 @@ import { IoIosArrowRoundForward, IoIosArrowRoundDown } from "react-icons/io";
 import DropDown from "@/pages/sections/DropDown/DropDown";
 import BottomUser from "@/pages/sections/PromptSlide/BottomUser";
 import { useModelStore } from "@/store/useModelStore";
-
+import { useNavigate } from "react-router-dom";
 interface SideBarType {
   sideBarOpenbtn: boolean;
   setsideBarOpenbtn: (value: boolean) => void;
@@ -27,6 +27,7 @@ const SideBarPrompt = ({ sideBarOpenbtn, setsideBarOpenbtn }: SideBarType) => {
   const [promptNameState, setPromptNameState] = useState(
     "This is music prompt 1",
   );
+  const navigate = useNavigate();
   const inputRef = useRef<HTMLInputElement | null>(null);
   const [renameClicked, setRenameClicked] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
@@ -61,14 +62,21 @@ const SideBarPrompt = ({ sideBarOpenbtn, setsideBarOpenbtn }: SideBarType) => {
       style={{ fontFamily: "'DM Sans', sans-serif" }}
     >
       {/* Header */}
-      <div className="flex items-center justify-between px-[18px] pt-[18px]">
+      <div className="flex items-center justify-between px-[18px] mt-5 pt-[18px]">
         <div className="flex items-center gap-2">
-          <div className="w-7 h-7 bg-[#1DB954] rounded-[7px] flex items-center justify-center">
-            {/* your logo SVG */}
+          <div
+            onClick={() => navigate("/")}
+            className="w-30 h-10 cursor-pointer bg-[#1DB954]/2  rounded-[8px] flex items-center justify-start"
+          >
+            <img
+              src="/photos/Logo_3.png"
+              alt="logo"
+              className="w-25 h-25 object-center mt-2"
+            />
           </div>
-          <span className="text-sm font-semibold text-white tracking-tight">
-            Musica AI
-          </span>
+          {/* <span className="text-sm font-semibold text-white tracking-tight">
+            Sonix AI
+          </span> */}
         </div>
         <button
           onClick={() => setsideBarOpenbtn(!sideBarOpenbtn)}
@@ -80,7 +88,7 @@ const SideBarPrompt = ({ sideBarOpenbtn, setsideBarOpenbtn }: SideBarType) => {
       </div>
 
       {/* Version Card */}
-      <div className="mx-[18px] mt-[18px] bg-[#161719] border border-[#1e2028] rounded-xl p-[14px_16px]">
+      <div className="mx-[18px] mt-[28px] bg-[#161719] border border-[#1e2028] rounded-xl p-[14px_16px]">
         <p className="text-[10px] uppercase tracking-[0.12em] text-[#444] font-medium mb-2.5">
           Active Model
         </p>

@@ -1,5 +1,5 @@
 "use client";
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
 import { cn } from "@/lib/utils";
@@ -12,7 +12,7 @@ import { IoMdEyeOff } from "react-icons/io";
 import gsap from "gsap";
 // import Cookies from "js-cookie";
 import { IconBrandGoogle } from "@tabler/icons-react";
-import { SignInAndSignUpContext } from "@/context/SiginAndSignUp";
+// import { SignInAndSignUpContext } from "@/context/SiginAndSignUp";
 // import { UserAuth } from "@/context/AuthContext";
 // import api from "../../../utils/api";
 import { toast } from "react-toastify";
@@ -24,10 +24,10 @@ import { useSignInStore } from "@/store/useSignInStore";
 // import api from "@/utils/api";
 
 export function Signin() {
-  const context = useContext(SignInAndSignUpContext);
-  if (!context) {
-    throw new Error("Navbar must be used within SignInAndSignUpProvider");
-  }
+  // const context = useContext(SignInAndSignUpContext);
+  // if (!context) {
+  //   throw new Error("Navbar must be used within SignInAndSignUpProvider");
+  // }
   // const {
   //   open,
   //   setOpen,
