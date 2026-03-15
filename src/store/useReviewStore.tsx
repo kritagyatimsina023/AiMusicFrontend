@@ -95,7 +95,6 @@ export const useReviewStore = create<ReviewProps>((set) => ({
         rating,
         userId: userId,
       });
-
       if (response.data) {
         set({ currentUserReview: response.data });
         toast.success("Review updated successfully");

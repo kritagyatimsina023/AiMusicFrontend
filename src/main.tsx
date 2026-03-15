@@ -5,13 +5,13 @@ import { ToastContainer } from "react-toastify";
 import { BrowserRouter as Router } from "react-router-dom";
 
 import App from "./App.tsx";
-import Navbar from "./components/sections/Navbar.tsx";
+// import Navbar from "./components/sections/Navbar.tsx";
 import { AuthContextProvider } from "./context/AuthContext.tsx";
-import SignInAndSignUpProvider from "./context/SiginAndSignUp.tsx";
-import { ParameterProvider } from "./context/InputParaContext.tsx";
-import ReviewProvider from "./context/ReviewContext.tsx";
-import { PromptProvider } from "./context/PromtContext.tsx";
-import { ToggleOutputProvider } from "./context/ToggleOutputContext.tsx";
+// import SignInAndSignUpProvider from "./context/SiginAndSignUp.tsx";
+// import { ParameterProvider } from "./context/InputParaContext.tsx";
+// import ReviewProvider from "./context/ReviewContext.tsx";
+// import { PromptProvider } from "./context/PromtContext.tsx";
+// import { ToggleOutputProvider } from "./context/ToggleOutputContext.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>

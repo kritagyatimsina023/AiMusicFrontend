@@ -22,7 +22,7 @@ const TextAreaPrompt = () => {
     }
     const response = await createPrompt(promptTxt, versionSelection);
     if (response) {
-      toast.success("Prompt was sent");
+      // toast.success("Prompt was sent");
       setPromptTxt("");
       setCaptionTxt("");
     } else {
