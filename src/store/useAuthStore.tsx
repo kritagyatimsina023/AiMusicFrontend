@@ -46,7 +46,6 @@ export const useAuthStore = create<AuthStore>((set) => ({
       const firebaseUser = result.user;
       if (!firebaseUser) return;
 
-      // API call to create/store user in backend
       const res = await api.post("/users/create-user", {
         name: firebaseUser.displayName || firebaseUser.email?.split("@")[0],
         email: firebaseUser.email,
@@ -63,15 +62,6 @@ export const useAuthStore = create<AuthStore>((set) => ({
     } catch (error) {
       toast.error("Error on pop up signin");
       console.error("Error while sign in", error);
-      //   if (
-      //     error.code === "auth/cancelled-popup-request" ||
-      //     error.code === "auth/popup-closed-by-user"
-      //   ) {
-      //     console.log("User closed popup, no action needed");
-      //   } else {
-      //     toast.error("Google Sign-in failed");
-      //     console.error(error);
-      //   }
     }
   },
 
@@ -81,7 +71,6 @@ export const useAuthStore = create<AuthStore>((set) => ({
       const firebaseUser = result.user;
       if (!firebaseUser) throw new Error("Invalid login");
 
-      // API call
       const res = await api.post("/users/create-user", {
         name: firebaseUser.displayName || firebaseUser.email?.split("@")[0],
         email: firebaseUser.email,
@@ -110,13 +99,11 @@ export const useAuthStore = create<AuthStore>((set) => ({
       const firebaseUser = result.user;
       if (!firebaseUser) throw new Error("Signup failed");
 
-      // API call
       const res = await api.post("/users/create-user", {
         name: firebaseUser.email?.split("@")[0],
         email: firebaseUser.email,
         photoUrl: "/photos/avatar.jpg",
       });
-      // useReviewStore.getState().fetchCurrentUserReview();
 
       const userId = res.data.user._id;
       Cookies.set("userId", userId, { expires: 7 });
@@ -138,7 +125,7 @@ export const useAuthStore = create<AuthStore>((set) => ({
     toast.success("Logged out successfully");
   },
 }));
-// Listen to Firebase auth state changes
+
 onAuthStateChanged(auth, async (currentUser) => {
   const store = useAuthStore.getState();
   if (currentUser) {

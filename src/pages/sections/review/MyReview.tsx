@@ -231,10 +231,7 @@ const MyReview = () => {
             onClick={() => setOpenReview()}
           />
           <div className="relative z-50">
-            <ReviewModelSectionEdit
-            // onReviewUpdated={handleReviewUpdated}
-            // existingReview={currentUserReview}
-            />
+            <ReviewModelSectionEdit />
           </div>
         </div>
       )}
