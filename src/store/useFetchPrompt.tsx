@@ -15,14 +15,30 @@ interface promptType {
   __v: number;
   _id: string;
 }
+interface OutputType {
+  emotion: string;
+  // lottieEmoji: string;
+  downloads: {
+    audio: string;
+    midi: string;
+  };
+  playback: {
+    audio: string;
+    midi: string;
+  };
+  session_id: string;
+}
 
 interface useFetchProps {
   isLoading: boolean;
   userPrompts: promptType[];
   getUserPrompt: () => Promise<void>;
+  outputData: OutputType | null;
+  getOutputByPrompt: (userId: string, promptId: string) => Promise<void>;
   createPrompt: (
     promptTxt: string,
     version: string,
+    caption: string,
     // genre: string,
     // instruments: string[],
     // key: string,
@@ -33,6 +49,7 @@ interface useFetchProps {
 export const useFetchPrompt = create<useFetchProps>((set, get) => ({
   isLoading: false,
   userPrompts: [],
+  outputData: null,
 
   getUserPrompt: async () => {
     try {
@@ -45,7 +62,31 @@ export const useFetchPrompt = create<useFetchProps>((set, get) => ({
       // set({ isLoading: false });
     }
   },
-  createPrompt: async (promptTxt, version) => {
+  getOutputByPrompt: async (userId: string, promptId: string) => {
+    try {
+      set({ isLoading: true });
+      const response = await fetch(
+        `http://localhost:8000/api/v1/outputPrompts/${userId}/${promptId}`,
+      );
+      const result = await response.json();
+      const data = result?.data?.[0];
+      if (!data) throw new Error("No output found");
+      set({
+        outputData: {
+          emotion: data.emotion,
+          // lottieEmoji: data.lottieEmoji,
+          downloads: data.downloads,
+          playback: data.playback,
+          session_id: data.session_id,
+        },
+      });
+    } catch (error) {
+      console.error("Error fetching output", error);
+    } finally {
+      set({ isLoading: false });
+    }
+  },
+  createPrompt: async (promptTxt, version, caption) => {
     try {
       const { getUserPrompt } = get();
       set({ isLoading: true });
@@ -54,14 +95,11 @@ export const useFetchPrompt = create<useFetchProps>((set, get) => ({
         trimmedName,
         promptTxt,
         version,
-        // genre,
-        // instruments,
-        // key,
-        // tempo,
+        caption,
       );
       if (!response) return false;
       await getUserPrompt();
-      await new Promise((resolve) => setTimeout(resolve, 3000));
+      await new Promise((resolve) => setTimeout(resolve, 4000));
       return true;
     } catch (error) {
       console.error("Error while creating prompt", error);

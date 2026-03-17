@@ -20,6 +20,7 @@ export const storeCallApiPrompt = async (
   trimmedName: string,
   promptTxt: string,
   version: string,
+  caption: string,
   // genre: string,
   // instruments: string[],
   // key: string,
@@ -31,25 +32,21 @@ export const storeCallApiPrompt = async (
       userid: Cookies.get("userId"),
       lyrics: promptTxt,
       version,
-      // genre: genre,
-      // instruments: instruments,
-      // key: key,
-      // tempo: tempo,
     });
     const promptResponse = await response.data;
     const promptId = promptResponse.data.prompt._id;
     console.log("THis is promptId", promptId);
-    return promptResponse;
-    // const musicData = await generateMusic({
-    //   lyrics: promptTxt,
-    //   genre: genre,
-    //   instruments: instruments,
-    //   key: key,
-    //   tempo: tempo,
-    // });
-    // console.log("From form music data", musicData?.data);
-    // const data = await saveMusicEmotion(musicData?.data, promptId);
-    // return { promptResponse: promptResponse, musicData: musicData, data: data };
+    const musicData = await generateMusic(
+      {
+        lyrics: promptTxt,
+        caption: caption,
+        cleanup: true,
+      },
+      version,
+    );
+    console.log("From form music data", musicData?.data);
+    const data = await saveMusicEmotion(musicData?.data, promptId);
+    return { promptResponse: promptResponse, musicData: musicData, data: data };
   } catch (error: any) {
     console.log(error);
     const rawMessage = error?.response?.data?.message;

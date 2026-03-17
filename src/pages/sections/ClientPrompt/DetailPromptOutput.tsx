@@ -6,39 +6,46 @@ import Lottie from "lottie-react";
 import download from "../../../../data/Animation/Downloading.json";
 import { Button } from "@/components/ui/button";
 // import { useToggleOutput } from "@/context/ToggleOutputContext";
-import joy from "../../../../data/Animation/3D Success.json";
-import anger from "../../../../data/Animation/Angry.json";
-import sadness from "../../../../data/Animation/Crying.json";
-import neutral from "../../../../data/Animation/Neutral face.json";
-import fear from "../../../../data/Animation/Screaming Fear Face.json";
-import surprise from "../../../../data/Animation/wow.json";
+// import joy from "../../../../data/Animation/3D Success.json";
+// import anger from "../../../../data/Animation/Angry.json";
+// import sadness from "../../../../data/Animation/Crying.json";
+// import neutral from "../../../../data/Animation/Neutral face.json";
+// import fear from "../../../../data/Animation/Screaming Fear Face.json";
+// import surprise from "../../../../data/Animation/wow.json";
 // import playMusic from "../../../../data/Animation/playMusic.json";
 import listenNow from "../../../../data/Animation/listen_now.json";
 
 import Cookies from "js-cookie";
 import { useEffect, useRef, useState } from "react";
 import { useModelStore } from "@/store/useModelStore";
+import { useFetchPrompt } from "@/store/useFetchPrompt";
 
 const DetailPromptOutput = () => {
   // const { setOpenOutputSection, openOutputSection, selectedPromtId } =
   //   useToggleOutput();
   const userid = Cookies.get("userId");
-  const [emotion, setEmotion] = useState<string>("");
-  const [lottie, setLottie] = useState<string>("");
-  const [audioUrl, setAudioUrl] = useState<string>("");
+  // const [emotion, setEmotion] = useState<string>("");
+  // const [lottie, setLottie] = useState<string>("");
+  // const [audioUrl, setAudioUrl] = useState<string>("");
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
-  const { selectedPromptId, setOpenOutput } = useModelStore();
 
-  const animationMap: Record<string, object> = {
-    sadness,
-    joy,
-    anger,
-    fear,
-    neutral,
-    surprise,
-  };
-  const animationData = animationMap[lottie];
+  // const { selectedPromptId, setOpenOutput } = useModelStore();
+  const { selectedPromptId, setOpenOutput } = useModelStore();
+  const { getOutputByPrompt, outputData, isLoading } = useFetchPrompt();
+  const emotion = outputData?.emotion || "";
+  // const lottie = outputData?.lottieEmoji || "";
+  const audioUrl = outputData?.downloads?.audio || "";
+
+  // const animationMap: Record<string, object> = {
+  //   sadness,
+  //   joy,
+  //   anger,
+  //   fear,
+  //   neutral,
+  //   surprise,
+  // };
+  // const animationData = animationMap[emotion];
   const { user } = UserAuth();
   function handleDownload() {
     const link = document.createElement("a");
@@ -56,25 +63,35 @@ const DetailPromptOutput = () => {
     } else {
       audioRef.current.play();
     }
-
     setIsPlaying(!isPlaying);
   };
   useEffect(() => {
-    const fetchData = async () => {
-      const response = await fetch(
-        `http://localhost:8000/api/v1/outputPrompts/${userid}/${selectedPromptId}`,
-        { method: "GET", headers: { "Content-type": "application/json" } },
-      );
-      const data = await response.json();
-      console.log("From detail output Promt section", data);
-      setEmotion(data?.data[0]?.emotion);
-      setLottie(data?.data[0]?.lottieEmoji);
-      setAudioUrl(`http://127.0.0.1:5000${data?.data[0]?.downloads?.audio}`);
-      console.log("audio url file", audioUrl);
-      console.log("this is emotion", emotion);
-    };
-    fetchData();
-  }, []);
+    if (!userid || !selectedPromptId) return;
+    getOutputByPrompt(userid, selectedPromptId);
+  }, [userid, selectedPromptId]);
+
+  if (isLoading) {
+    return (
+      <div className="text-white text-center py-10">Generating music...</div>
+    );
+  }
+
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     const response = await fetch(
+  //       `http://localhost:8000/api/v1/outputPrompts/${userid}/${selectedPromptId}`,
+  //       { method: "GET", headers: { "Content-type": "application/json" } },
+  //     );
+  //     const data = await response.json();
+  //     console.log("From detail output Promt section", data);
+  //     setEmotion(data?.data[0]?.emotion);
+  //     setLottie(data?.data[0]?.lottieEmoji);
+  //     setAudioUrl(`http://127.0.0.1:5000${data?.data[0]?.downloads?.audio}`);
+  //     console.log("audio url file", audioUrl);
+  //     console.log("this is emotion", emotion);
+  //   };
+  //   fetchData();
+  // }, []);
   return (
     <div className="bg-black/10 w-[40rem] relative px-9 py-4 rounded-xl text-white">
       <img
@@ -117,7 +134,7 @@ const DetailPromptOutput = () => {
       <div className="text-neutral-300">
         <div className="text-xl flex items-center gap-6 justify-between">
           <span> Emotion: {emotion}</span>
-          <div className="rounded-full h-[5rem] w-[5rem] overflow-hidden">
+          {/* <div className="rounded-full h-[5rem] w-[5rem] overflow-hidden">
             <Lottie
               className="h-full w-full object-center"
               height={20}
@@ -125,7 +142,7 @@ const DetailPromptOutput = () => {
               animationData={animationData}
               loop={true}
             />
-          </div>
+          </div> */}
         </div>
       </div>
       <div className="flex flex-col justify-center items-center">
