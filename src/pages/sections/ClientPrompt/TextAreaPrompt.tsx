@@ -20,7 +20,11 @@ const TextAreaPrompt = () => {
       toast.error("Please enter lyrics");
       return;
     }
-    const response = await createPrompt(promptTxt, versionSelection);
+    const response = await createPrompt(
+      promptTxt,
+      versionSelection,
+      captionTxt,
+    );
     if (response) {
       // toast.success("Prompt was sent");
       setPromptTxt("");

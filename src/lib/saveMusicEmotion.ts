@@ -25,28 +25,35 @@ interface MusicGenerationData {
   status: "completed" | "pending" | string; // optional union
 
   steps: string[];
+  version_used: number;
 }
 
 // function filterAnimation(data: string) {
 //   const filterEmotion = animations.find((item) => item?.title === data);
 //   return filterEmotion?.link;
 // }
+const BASE = "http://127.0.0.1:5000";
+
 export const saveMusicEmotion = async (
   data: MusicGenerationData,
-  promptId: string
+  promptId: string,
 ) => {
-  // const animationLink = filterAnimation(data?.emotion);
   try {
     const response = await api.post("/outputPrompts", {
-      emotion: data.emotion,
+      emotion: data?.emotion,
       userId: Cookies.get("userId"),
       promptId: promptId,
-      emoji: data?.emotion,
+      // emoji: data?.emotion,
       session_id: data?.session_id,
-      downloads: { audio: data?.downloads?.audio, midi: data?.downloads?.midi },
-      playback: { audio: data?.playback?.audio, midi: data?.playback?.midi },
+      downloads: {
+        audio: BASE + data?.downloads?.audio,
+        midi: BASE + data?.downloads?.midi,
+      },
+      playback: {
+        audio: BASE + data?.playback?.audio,
+        midi: data?.playback?.midi ? BASE + data?.playback?.midi : null,
+      },
     });
-    if (!response) throw Error("No response");
     return response.data;
   } catch (error) {
     console.log(error);
