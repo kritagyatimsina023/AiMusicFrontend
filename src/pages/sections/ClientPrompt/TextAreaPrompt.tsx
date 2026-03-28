@@ -5,6 +5,7 @@ import ModelWindow from "@/components/layout/ModelWindow";
 import DetailPromptOutput from "./DetailPromptOutput";
 import { useFetchPrompt } from "@/store/useFetchPrompt";
 import { useModelStore } from "@/store/useModelStore";
+import MusicGeneratedToast from "./MusicGeneratedToast";
 
 const MAX = 2000;
 
@@ -13,11 +14,14 @@ const TextAreaPrompt = () => {
   const [captionTxt, setCaptionTxt] = useState("");
   const { createPrompt, isLoading } = useFetchPrompt();
   const { versionSelection, openOutputSection } = useModelStore();
+  const [showSuccess, setShowSuccess] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!promptTxt.trim()) {
-      toast.error("Please enter lyrics");
+    if (!promptTxt || !versionSelection || !captionTxt) {
+      toast.error(
+        `${!promptTxt ? "Prompt Field cannot be empty" : "Caption field cannot be empty"}`,
+      );
       return;
     }
     const response = await createPrompt(
@@ -26,16 +30,24 @@ const TextAreaPrompt = () => {
       captionTxt,
     );
     if (response) {
+      setShowSuccess(true);
       // toast.success("Prompt was sent");
       setPromptTxt("");
       setCaptionTxt("");
     } else {
       toast.error("Failed to generate prompt");
+      setShowSuccess(false);
     }
   };
 
   return (
     <>
+      <div className="fixed bottom-6 right-6 z-50">
+        <MusicGeneratedToast
+          show={showSuccess}
+          onDismiss={() => setShowSuccess(false)}
+        />
+      </div>
       <div
         className="w-full flex justify-center"
         style={{ fontFamily: "'DM Sans', sans-serif" }}

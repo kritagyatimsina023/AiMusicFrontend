@@ -1,10 +1,9 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { useFetchPrompt } from "@/store/useFetchPrompt";
 import { MusicToggleButton } from "@/components/sections/MusicToggleButton";
 // import { useToggleOutput } from "@/context/ToggleOutputContext";
 import { useModelStore } from "@/store/useModelStore";
 import LoadingAnimation from "./LoadingAnimation";
-import MusicGeneratedToast from "./MusicGeneratedToast";
 
 const PromptOutputSection = () => {
   // const userPrompts = useFetchPrompt((state) => state.userPrompts);
@@ -17,17 +16,17 @@ const PromptOutputSection = () => {
   const prevLength = useRef(0);
 
   // Track when isLoading flips false after being true
-  const wasLoading = useRef(false);
-  const [showSuccess, setShowSuccess] = useState(false);
+  // const wasLoading = useRef(false);
+  // const [showSuccess, setShowSuccess] = useState(false);
 
-  useEffect(() => {
-    if (isLoading) {
-      wasLoading.current = true;
-    } else if (wasLoading.current) {
-      wasLoading.current = false;
-      setShowSuccess(true); // 🎵 trigger the toast
-    }
-  }, [isLoading]);
+  // useEffect(() => {
+  //   if (isLoading) {
+  //     wasLoading.current = true;
+  //   } else if (wasLoading.current) {
+  //     wasLoading.current = false;
+  //     setShowSuccess(true); // 🎵 trigger the toast
+  //   }
+  // }, [isLoading]);
 
   useEffect(() => {
     getUserPrompt();
@@ -57,12 +56,12 @@ const PromptOutputSection = () => {
   };
   return (
     <>
-      <div className="fixed bottom-6 right-6 z-50">
+      {/* <div className="fixed bottom-6 right-6 z-50">
         <MusicGeneratedToast
           show={showSuccess}
           onDismiss={() => setShowSuccess(false)}
         />
-      </div>
+      </div> */}
       <div
         ref={containerRef}
         className="w-[50rem] max-h-[30rem] py-3 flex flex-col items-end group overflow-y-auto hide-scrollbar"
@@ -70,7 +69,7 @@ const PromptOutputSection = () => {
         {isLoading ? (
           <LoadingAnimation />
         ) : userPrompts?.length === 0 ? (
-          <p>Prompt has not loaded yet...</p>
+          <p>No prompt found..</p>
         ) : (
           userPrompts?.map((data) => (
             <div
@@ -102,7 +101,6 @@ const PromptOutputSection = () => {
 
                   <div className="flex items-center justify-between gap-3">
                     <MusicToggleButton />
-
                     <span
                       onClick={() => handleViewDetails(data._id)}
                       className="text-blue-400/80 cursor-pointer"
@@ -112,7 +110,6 @@ const PromptOutputSection = () => {
                   </div>
                 </div>
               </div>
-
               <div className="border-b border-white/30" />
             </div>
           ))
