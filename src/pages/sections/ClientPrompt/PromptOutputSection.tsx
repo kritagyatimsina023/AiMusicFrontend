@@ -47,7 +47,7 @@ const PromptOutputSection = () => {
         }
       }, 100);
     }
-
+    console.log("detail prompt user prompt", userPrompts);
     prevLength.current = userPrompts.length;
   }, [userPrompts]);
   const handleViewDetails = (id: string) => {
@@ -71,22 +71,24 @@ const PromptOutputSection = () => {
         ) : userPrompts?.length === 0 ? (
           <p>No prompt found..</p>
         ) : (
-          userPrompts?.map((data) => (
-            <div
-              key={data._id}
-              className="duration-300 py-4 ease-out group-hover:translate-y-[-10px] 
+          userPrompts?.map((data) => {
+            console.log("User prompt data", data._id);
+            return (
+              <div
+                key={data._id}
+                className="duration-300 py-4 ease-out group-hover:translate-y-[-10px] 
              w-full flex flex-col gap-3"
-            >
-              <div className="w-full flex justify-end">
-                <div className="border-1 max-w-[30rem] rounded-xl border-white/30">
-                  <p className="p-2 text-gray-300/70">{data.lyrics}</p>
+              >
+                <div className="w-full flex justify-end">
+                  <div className="border-1 max-w-[30rem] rounded-xl border-white/30">
+                    <p className="p-2 text-gray-300/70">{data.lyrics}</p>
+                  </div>
                 </div>
-              </div>
-              <p>{data.version}</p>
+                <p>{data.version}</p>
 
-              <div className="w-full flex justify-start">
-                <div className="flex flex-col max-w-[40rem]">
-                  {/* <div className="flex px-4 py-2 flex-col border rounded-[10px] border-white/30 text-white/90">
+                <div className="w-full flex justify-start">
+                  <div className="flex flex-col max-w-[40rem]">
+                    {/* <div className="flex px-4 py-2 flex-col border rounded-[10px] border-white/30 text-white/90">
                   <span>Genre: {data.genre}</span>
                   <span>Key: {data.key}</span>
                   <span>Tempo: {data.tempo}</span>
@@ -99,20 +101,21 @@ const PromptOutputSection = () => {
                   </p>
                 </div> */}
 
-                  <div className="flex items-center justify-between gap-3">
-                    <MusicToggleButton />
-                    <span
-                      onClick={() => handleViewDetails(data._id)}
-                      className="text-blue-400/80 cursor-pointer"
-                    >
-                      View Details
-                    </span>
+                    <div className="flex items-center justify-between gap-3">
+                      <MusicToggleButton />
+                      <span
+                        onClick={() => handleViewDetails(data._id)}
+                        className="text-blue-400/80 cursor-pointer"
+                      >
+                        View Details
+                      </span>
+                    </div>
                   </div>
                 </div>
+                <div className="border-b border-white/30" />
               </div>
-              <div className="border-b border-white/30" />
-            </div>
-          ))
+            );
+          })
         )}
       </div>
     </>

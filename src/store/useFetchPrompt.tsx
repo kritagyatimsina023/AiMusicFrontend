@@ -106,16 +106,13 @@ export const useFetchPrompt = create<useFetchProps>((set, get) => ({
   getOutputByPrompt: async (userId: string, promptId: string) => {
     try {
       set({ isLoading: true });
-
       const response = await fetch(
         `http://localhost:8000/api/v1/outputPrompts/${userId}/${promptId}`,
       );
-
       const result = await response.json();
-      const data = result?.data;
-
+      const data = result?.data?.[0];
+      console.log("This is data", data);
       if (!data) throw new Error("No output found");
-
       set({
         outputData: {
           emotion: data.emotion,
