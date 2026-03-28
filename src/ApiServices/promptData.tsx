@@ -21,10 +21,6 @@ export const storeCallApiPrompt = async (
   promptTxt: string,
   version: string,
   caption: string,
-  // genre: string,
-  // instruments: string[],
-  // key: string,
-  // tempo: string,
 ) => {
   try {
     const response = await api.post("/prompts", {
@@ -48,6 +44,7 @@ export const storeCallApiPrompt = async (
     );
     console.log("From form music data", musicData?.data);
     const data = await saveMusicEmotion(musicData?.data, promptId);
+    console.log("This is save emotion data", data);
     return { promptResponse: promptResponse, musicData: musicData, data: data };
   } catch (error: any) {
     console.log(error);

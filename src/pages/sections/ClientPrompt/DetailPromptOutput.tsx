@@ -202,20 +202,17 @@ import MusicCard from "./MusicCard";
 
 const DetailPromptOutput = () => {
   const userid = Cookies.get("userId");
+  console.log("This is current user id", userid);
   const { selectedPromptId, setOpenOutput } = useModelStore();
   const { getOutputByPrompt, outputData, isLoading } = useFetchPrompt();
   const { user } = UserAuth();
-
   useEffect(() => {
     if (!userid || !selectedPromptId) return;
     getOutputByPrompt(userid, selectedPromptId);
   }, [userid, selectedPromptId, getOutputByPrompt]);
-
   const emotion = outputData?.emotion || "";
   const variants = outputData?.variants || [];
-
   const showMultipleVariants = variants.length > 1;
-
   return (
     <div className="bg-black/10 w-[50rem] relative px-9 py-4 rounded-xl text-white">
       <img
@@ -278,14 +275,17 @@ const DetailPromptOutput = () => {
       ) : (
         <div className="flex flex-wrap justify-center gap-6 mt-6">
           {showMultipleVariants ? (
-            variants.map((variant) => (
-              <MusicCard
-                key={variant.variant_index}
-                title={`Variant ${variant.variant_index}`}
-                audioUrl={variant.playback.audio}
-                downloadUrl={variant.downloads.audio}
-              />
-            ))
+            variants.map((variant) => {
+              console.log("This is varient", variant);
+              return (
+                <MusicCard
+                  key={variant.variant_index}
+                  title={`Variant ${variant.variant_index}`}
+                  audioUrl={variant.playback.audio}
+                  downloadUrl={variant.downloads.audio}
+                />
+              );
+            })
           ) : (
             <MusicCard
               title="Generated Music"

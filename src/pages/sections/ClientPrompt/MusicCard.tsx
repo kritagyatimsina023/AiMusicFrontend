@@ -10,15 +10,16 @@ interface MusicCardProps {
   downloadUrl: string;
 }
 
-const FLASK_BASE_URL = "http://localhost:5000";
+// const FLASK_BASE_URL = "http://localhost:5000";
 
 const MusicCard = ({ title, audioUrl, downloadUrl }: MusicCardProps) => {
+  console.log("This is audioURL", audioUrl, downloadUrl);
+  console.log("This is audioUrl from props", audioUrl);
+  console.log("This is download URL", downloadUrl);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
-
-  const fullAudioUrl = `${FLASK_BASE_URL}${audioUrl}`;
-  const fullDownloadUrl = `${FLASK_BASE_URL}${downloadUrl}`;
-
+  const fullAudioUrl = `${audioUrl}`;
+  const fullDownloadUrl = `${downloadUrl}`;
   const handlePlayPause = async () => {
     if (!audioRef.current) return;
 
