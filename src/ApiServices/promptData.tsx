@@ -32,10 +32,12 @@ export const storeCallApiPrompt = async (
       userid: Cookies.get("userId"),
       lyrics: promptTxt,
       version,
+      caption,
     });
     const promptResponse = await response.data;
     const promptId = promptResponse.data.prompt._id;
     console.log("THis is promptId", promptId);
+    // return promptResponse.data;
     const musicData = await generateMusic(
       {
         lyrics: promptTxt,

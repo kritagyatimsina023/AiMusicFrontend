@@ -15,7 +15,6 @@ export const useModelStore = create<ModelStoreprops>((set) => ({
       openOutputSection: !state.openOutputSection,
     })),
   selectedPromptId: null,
-
   setVersion: (value) => set({ versionSelection: value }),
   setSelectedPromptId: (id) => set({ selectedPromptId: id }),
 }));

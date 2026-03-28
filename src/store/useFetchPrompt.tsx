@@ -1,5 +1,6 @@
 import { storeCallApiPrompt } from "@/ApiServices/promptData";
 import { fetchUserPrompts } from "@/lib/fetchPrompts";
+
 import { create } from "zustand";
 
 interface promptType {
@@ -15,9 +16,20 @@ interface promptType {
   __v: number;
   _id: string;
 }
+interface VariantType {
+  variant_index: number;
+  downloads: {
+    audio: string;
+    midi: string;
+  };
+  playback: {
+    audio: string;
+    midi: string;
+  };
+}
+
 interface OutputType {
   emotion: string;
-  // lottieEmoji: string;
   downloads: {
     audio: string;
     midi: string;
@@ -27,6 +39,9 @@ interface OutputType {
     midi: string;
   };
   session_id: string;
+  status?: string;
+  version_used?: string;
+  variants?: VariantType[];
 }
 
 interface useFetchProps {
@@ -62,22 +77,54 @@ export const useFetchPrompt = create<useFetchProps>((set, get) => ({
       // set({ isLoading: false });
     }
   },
+  // getOutputByPrompt: async (userId: string, promptId: string) => {
+  //   try {
+  //     set({ isLoading: true });
+  //     const response = await fetch(
+  //       `http://localhost:8000/api/v1/outputPrompts/${userId}/${promptId}`,
+  //     );
+  //     const result = await response.json();
+  //     const data = result?.data;
+  //     if (!data) throw new Error("No output found");
+  //     set({
+  //       outputData: {
+  //         emotion: data.emotion,
+  //         downloads: data.downloads,
+  //         playback: data.playback,
+  //         session_id: data.session_id,
+  //         status: data.status,
+  //         version_used: data.version_used,
+  //         variants: data.variants || [],
+  //       },
+  //     });
+  //   } catch (error) {
+  //     console.error("Error fetching output", error);
+  //   } finally {
+  //     set({ isLoading: false });
+  //   }
+  // },
   getOutputByPrompt: async (userId: string, promptId: string) => {
     try {
       set({ isLoading: true });
+
       const response = await fetch(
         `http://localhost:8000/api/v1/outputPrompts/${userId}/${promptId}`,
       );
+
       const result = await response.json();
-      const data = result?.data?.[0];
+      const data = result?.data;
+
       if (!data) throw new Error("No output found");
+
       set({
         outputData: {
           emotion: data.emotion,
-          // lottieEmoji: data.lottieEmoji,
           downloads: data.downloads,
           playback: data.playback,
           session_id: data.session_id,
+          status: data.status,
+          version_used: data.version_used,
+          variants: data.variants || [],
         },
       });
     } catch (error) {
@@ -86,6 +133,7 @@ export const useFetchPrompt = create<useFetchProps>((set, get) => ({
       set({ isLoading: false });
     }
   },
+
   createPrompt: async (promptTxt, version, caption) => {
     try {
       const { getUserPrompt } = get();
