@@ -59,6 +59,7 @@ export const useAuthStore = create<AuthStore>((set) => ({
       toast.success(
         `Welcome ${firebaseUser.displayName || firebaseUser.email}`,
       );
+      sessionStorage.setItem("music-info-seen", "false");
     } catch (error) {
       toast.error("Error on pop up signin");
       console.error("Error while sign in", error);
@@ -83,6 +84,7 @@ export const useAuthStore = create<AuthStore>((set) => ({
 
       set({ user: firebaseUser, userId });
       toast.success(`Logged in as ${firebaseUser.email}`);
+      sessionStorage.setItem("music-info-seen", "false");
     } catch (error) {
       toast.error("Email login failed");
       console.error(error);
@@ -110,6 +112,7 @@ export const useAuthStore = create<AuthStore>((set) => ({
 
       set({ user: firebaseUser, userId });
       toast.success("Registered successfully");
+      sessionStorage.setItem("music-info-seen", "false");
     } catch (error) {
       toast.error("Signup failed");
       console.error(error);
@@ -123,6 +126,7 @@ export const useAuthStore = create<AuthStore>((set) => ({
     useReviewStore.setState({ currentUserReview: null });
     set({ user: null, userId: null });
     toast.success("Logged out successfully");
+    sessionStorage.removeItem("music-info-seen");
   },
 }));
 

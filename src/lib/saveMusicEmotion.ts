@@ -186,10 +186,6 @@ interface MusicGenerationData {
 
 const BASE = "http://localhost:5000";
 
-/**
- * If URL already starts with http/https, return as-is
- * Otherwise prepend BASE
- */
 const makeFullUrl = (url?: string | null) => {
   if (!url) return null;
   if (url.startsWith("http://") || url.startsWith("https://")) {

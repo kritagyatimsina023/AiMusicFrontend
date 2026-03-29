@@ -2,67 +2,131 @@
   "courses": [
     {
       "id": 1,
-      "title": "Guitar ",
-      "slug": "guitar",
-      "description": "Explore the rich tones of acoustic and electric guitars while learning strumming patterns, chords, and melody crafting essential for generating expressive guitar-driven music.",
-      "isFeatured": true,
-      "image": "/photos/guitar.avif"
-    },
-    {
-      "id": 2,
-      "title": "Piano ",
+      "title": "Piano",
       "slug": "piano",
-      "description": "Understand piano scales, chord progressions, and harmony structures to help your AI system create warm, emotional, and dynamic piano-based compositions.",
+      "description": "Covers acoustic and electric piano tones used for emotional melodies, chord progressions, and expressive harmonic structures in AI-generated music.",
       "isFeatured": true,
       "image": "/photos/piano.avif"
     },
     {
-      "id": 3,
-      "title": "Drum Sets",
-      "slug": "advanced-music-production",
-      "description": "Learn how different instruments blend in professional compositions, including sound layering, mixing, and mastering to enhance AI-generated music quality.",
+      "id": 2,
+      "title": "Mallet / Percussion",
+      "slug": "mallet-percussion",
+      "description": "Includes instruments like xylophone, vibraphone, and bells that add bright textures, rhythmic sparkle, and cinematic accents to generated compositions.",
       "isFeatured": true,
       "image": "/photos/music_prod.avif"
     },
     {
-      "id": 6,
-      "title": "Electronic Dance Music Production",
-      "slug": "edm-production",
-      "description": "Study synthesizers, drum machines, and electronic instruments to teach your AI how to produce energetic beats and modern EDM soundscapes.",
-      "isFeatured": true,
-      "image": "/photos/edm.avif"
-    },
-    {
-      "id": 7,
-      "title": "Electronic Music",
-      "slug": "electronic-music",
-      "description": "Explore synthesizers, digital sound design, and rhythmic patterns that help AI generate energetic electronic tracks with modern textures and driving beats.",
+      "id": 3,
+      "title": "Organ",
+      "slug": "organ",
+      "description": "Useful for creating warm sustained harmonies, gospel-like tones, ambient layers, and vintage keyboard textures in music generation.",
       "isFeatured": true,
       "image": "/photos/electronic.jpg"
     },
     {
-      "id": 8,
-      "title": "Jazz Improvisation",
-      "slug": "jazz-improvisation",
-      "description": "Learn the expressive nature of jazz chords, swing rhythms, and improvisation techniques that enable AI to produce soulful, smooth, and highly dynamic jazz pieces.",
+      "id": 4,
+      "title": "Guitar",
+      "slug": "guitar",
+      "description": "Explore acoustic and electric guitar-driven sounds for rhythm, melody, strumming patterns, and expressive lead sections in AI music output.",
       "isFeatured": true,
-      "image": "/photos/jazz.webp"
+      "image": "/photos/guitar.avif"
     },
     {
-      "id": 9,
-      "title": "Rock Music Essentials",
-      "slug": "rock-music-essentials",
-      "description": "Understand aggressive guitar riffs, punchy drum patterns, and powerful vocal styles to train AI models in generating bold and energetic rock compositions.",
+      "id": 5,
+      "title": "Bass",
+      "slug": "bass",
+      "description": "Provides low-end groove, rhythmic foundation, and tonal depth that help generated tracks feel fuller, more balanced, and musically grounded.",
       "isFeatured": true,
       "image": "/photos/Rock.jpg"
     },
     {
-      "id": 10,
-      "title": "Classical Music Theory",
-      "slug": "classical-music-theory",
-      "description": "Discover orchestration, harmony, and the structure of classical compositions so your AI can create elegant, emotional, and deeply layered symphonic music.",
+      "id": 6,
+      "title": "Strings",
+      "slug": "strings",
+      "description": "Ideal for emotional layers, orchestral depth, cinematic swells, and expressive harmonies that make generated music feel rich and dramatic.",
       "isFeatured": true,
       "image": "/photos/classical.jpg"
+    },
+    {
+      "id": 7,
+      "title": "Ensemble / Choir",
+      "slug": "ensemble-choir",
+      "description": "Adds vocal pads, layered textures, and lush ensemble harmonies that help create atmospheric and cinematic AI-generated soundscapes.",
+      "isFeatured": true,
+      "image": "/photos/jazz.webp"
+    },
+    {
+      "id": 8,
+      "title": "Brass",
+      "slug": "brass",
+      "description": "Includes trumpets, trombones, and horn-style sounds useful for bold sections, orchestral power, and energetic musical highlights.",
+      "isFeatured": true,
+      "image": "/photos/Rock.jpg"
+    },
+    {
+      "id": 9,
+      "title": "Reed",
+      "slug": "reed",
+      "description": "Covers saxophone, clarinet, and related reed instruments that add soulful expression, jazzy movement, and smooth melodic character.",
+      "isFeatured": true,
+      "image": "/photos/jazz.webp"
+    },
+    {
+      "id": 10,
+      "title": "Pipe",
+      "slug": "pipe",
+      "description": "Includes flute and pipe-like sounds that work well for airy melodies, folk-inspired passages, and soft cinematic phrasing.",
+      "isFeatured": true,
+      "image": "/photos/classical.jpg"
+    },
+    {
+      "id": 11,
+      "title": "Synth Lead",
+      "slug": "synth-lead",
+      "description": "Best for catchy hooks, electronic solos, futuristic melodies, and standout lead lines in modern AI-generated music.",
+      "isFeatured": true,
+      "image": "/photos/edm.avif"
+    },
+    {
+      "id": 12,
+      "title": "Synth Pad",
+      "slug": "synth-pad",
+      "description": "Creates smooth ambient layers, dreamy textures, and background harmonic support that make electronic tracks feel spacious and immersive.",
+      "isFeatured": true,
+      "image": "/photos/electronic.jpg"
+    },
+    {
+      "id": 13,
+      "title": "Synth FX",
+      "slug": "synth-fx",
+      "description": "Used for futuristic sound design, transitions, digital textures, and unique sonic effects that enhance generated music creatively.",
+      "isFeatured": true,
+      "image": "/photos/edm.avif"
+    },
+    {
+      "id": 14,
+      "title": "Ethnic",
+      "slug": "ethnic",
+      "description": "Represents culturally inspired instruments and world textures that bring diversity, uniqueness, and regional flavor to generated tracks.",
+      "isFeatured": true,
+      "image": "/photos/classical.jpg"
+    },
+    {
+      "id": 15,
+      "title": "Percussive",
+      "slug": "percussive",
+      "description": "Focused on non-drum rhythm elements that add groove, movement, punch, and dynamic rhythmic support across musical styles.",
+      "isFeatured": true,
+      "image": "/photos/music_prod.avif"
+    },
+    {
+      "id": 16,
+      "title": "SFX",
+      "slug": "sfx",
+      "description": "Special effect sounds used to create atmosphere, transitions, cinematic moments, and experimental textures in AI music generation.",
+      "isFeatured": true,
+      "image": "/photos/electronic.jpg"
     }
   ]
 }
