@@ -8,11 +8,12 @@ interface MusicCardProps {
   title: string;
   audioUrl: string;
   downloadUrl: string;
+  score?: number;
 }
 
 // const FLASK_BASE_URL = "http://localhost:5000";
 
-const MusicCard = ({ title, audioUrl, downloadUrl }: MusicCardProps) => {
+const MusicCard = ({ title, audioUrl, downloadUrl, score }: MusicCardProps) => {
   console.log("This is audioURL", audioUrl, downloadUrl);
   console.log("This is audioUrl from props", audioUrl);
   console.log("This is download URL", downloadUrl);
@@ -48,6 +49,11 @@ const MusicCard = ({ title, audioUrl, downloadUrl }: MusicCardProps) => {
     <div className="bg-white/5 border border-white/10 rounded-2xl px-5 py-4 flex flex-col items-center gap-3 min-w-[220px]">
       <h3 className="text-white/80 font-semibold text-sm">{title}</h3>
 
+      {score !== undefined && (
+        <p className="text-sm text-white/70 mt-2">
+          Score: <span className="text-green-400 font-semibold">{score}</span>
+        </p>
+      )}
       <audio
         ref={audioRef}
         src={fullAudioUrl}

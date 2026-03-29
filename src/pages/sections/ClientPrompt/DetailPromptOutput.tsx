@@ -283,6 +283,7 @@ const DetailPromptOutput = () => {
                   title={`Variant ${variant.variant_index}`}
                   audioUrl={variant.playback.audio}
                   downloadUrl={variant.downloads.audio}
+                  score={variant.score}
                 />
               );
             })
@@ -298,6 +299,9 @@ const DetailPromptOutput = () => {
                 variants.length === 1
                   ? variants[0].downloads.audio
                   : outputData?.downloads?.audio || ""
+              }
+              score={
+                variants.length === 1 ? variants[0].score : outputData?.score
               }
             />
           )}

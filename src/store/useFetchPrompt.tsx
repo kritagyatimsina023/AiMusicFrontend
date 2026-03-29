@@ -26,10 +26,12 @@ interface VariantType {
     audio: string;
     midi: string;
   };
+  score?: number;
 }
 
 interface OutputType {
   emotion: string;
+  score?: number;
   downloads: {
     audio: string;
     midi: string;
@@ -116,6 +118,7 @@ export const useFetchPrompt = create<useFetchProps>((set, get) => ({
       set({
         outputData: {
           emotion: data.emotion,
+          score: data.score,
           downloads: data.downloads,
           playback: data.playback,
           session_id: data.session_id,
