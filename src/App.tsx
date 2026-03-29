@@ -1,6 +1,4 @@
-import React from "react";
 import "./App.css";
-import Navbar from "./components/sections/Navbar";
 import AllRoutes from "./routes/AllRoutes";
 
 function App() {
